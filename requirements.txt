@@ -10,7 +10,7 @@
 scikit-learn==1.5.2
 xgboost==2.1.1
 lightgbm==4.5.0
-catboost==1.2.7
+# catboost removed: requires Microsoft C++ Build Tools on Windows (see https://catboost.ai/docs/installation/python-installation-method-pip-install)
 
 # ==============================================================================
 # DEEP LEARNING
