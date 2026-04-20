@@ -1,4 +1,4 @@
-# Reply Sandbox 2026 — The Eye 👁️
+# CareAlert
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square&logo=python)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
@@ -12,7 +12,7 @@
 
 ## 📖 Overview
 
-**The Eye** is our solution to the **Reply Sandbox 2026 — Propedeutical Sandbox** challenge.
+
 
 Set in a dystopian near-future (2087), the challenge unfolds inside **Reply Mirror** — a hyper-connected digital metropolis where every citizen is continuously monitored through the **MirrorLife** public health infrastructure. MirrorLife ingests real-time biometric, behavioral, and environmental data for every individual in the city, with the declared goal of enabling proactive, personalized healthcare at scale.
 
