@@ -1,4 +1,4 @@
-# CareAlert
+# CareAlert — The Eye
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square&logo=python)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
@@ -6,13 +6,12 @@
 ![ML](https://img.shields.io/badge/Approach-Multi--Agent%20AI-purple?style=flat-square)
 ![Metric](https://img.shields.io/badge/Metric-F1%20Score-orange?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square)
+
 > *"In 2087, the city watches. The question is whether it watches to protect — or to control."*
 
 ---
 
 ## 📖 Overview
-
-
 
 Set in a dystopian near-future (2087), the challenge unfolds inside **Reply Mirror** — a hyper-connected digital metropolis where every citizen is continuously monitored through the **MirrorLife** public health infrastructure. MirrorLife ingests real-time biometric, behavioral, and environmental data for every individual in the city, with the declared goal of enabling proactive, personalized healthcare at scale.
 
@@ -28,7 +27,6 @@ To solve this, **The Eye** wraps state-of-the-art ML algorithms — including **
 The primary evaluation metric is the **F1 Score**, ensuring a rigorous balance between precision and recall across both classes.
 
 > ⚠️ **Data notice:** Raw challenge data is **not included** in this repository in compliance with Reply's competition rules. See the [Setup](#️-setup--installation) section for instructions on where to place the data files.
- 
 
 ---
 
@@ -46,10 +44,11 @@ The primary evaluation metric is the **F1 Score**, ensuring a rigorous balance b
 The challenge is structured across **3 progressive levels**, each introducing greater data complexity, noisier signals, and higher classification difficulty.
 
 ---
+
 ## 📂 Repository Structure
 
 ```
-reply-sandbox-2026-the-eye/
+CareAlert-the-eye/
 │
 ├── data/                        # ⚠️ NOT tracked by Git — add raw data here
 │   ├── raw/
@@ -59,36 +58,35 @@ reply-sandbox-2026-the-eye/
 │   └── processed/               # Cleaned & feature-engineered datasets
 │
 ├── notebooks/                   # Jupyter notebooks for exploration & analysis
-│   ├── 01_eda.ipynb             # Exploratory Data Analysis
+│   ├── 01_eda.ipynb
 │   ├── 02_feature_engineering.ipynb
-│   └── 03_modelling.ipynb       # Model training & evaluation
+│   └── 03_modelling.ipynb
 │
 ├── src/                         # Core source code
 │   ├── main.py                  # Pipeline entry point — runs all agents
 │   │
 │   ├── agents/                  # Multi-agent AI system
 │   │   ├── __init__.py
-│   │   ├── feature_agent.py     # Feature engineering agent
-│   │   ├── prediction_agent.py  # ML prediction agent
-│   │   └── decision_agent.py    # Final classification decision agent
+│   │   ├── feature_agent.py
+│   │   ├── prediction_agent.py
+│   │   └── decision_agent.py
 │   │
-│   ├── models/                  # ML model definitions & loaders
+│   ├── models/
 │   │   ├── __init__.py
 │   │   └── classifier.py
 │   │
-│   └── utils/                   # Shared utilities
+│   └── utils/
 │       ├── __init__.py
 │       ├── preprocessing.py
 │       └── metrics.py
 │
-├── output/                      # Submission files (ASCII format)
+├── output/
 │   └── submission.txt
 │
-├── requirements.txt             # Python dependencies
-├── .gitignore                   # Excludes data/, .venv/, __pycache__/, etc.
+├── requirements.txt
+├── .gitignore
 └── README.md
 ```
- 
 
 ---
 
@@ -97,8 +95,6 @@ reply-sandbox-2026-the-eye/
 The solution consumes three primary data sources provided by MirrorLife:
 
 ### `Status.csv` — Monitoring Event Stream
-
-The core time-series dataset recording continuous biometric and environmental readings for each citizen.
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -112,24 +108,20 @@ The core time-series dataset recording continuous biometric and environmental re
 
 ### `Locations/` — GPS BioTag Records
 
-Spatial tracking data collected via each citizen's BioTag implant.
-
 | Field | Type | Description |
 |-------|------|-------------|
 | `BioTag` | string | Unique device identifier |
 | `Datetime` | datetime | Timestamp of the GPS reading |
 | `Lat` | float | Latitude coordinate |
 | `Lng` | float | Longitude coordinate |
-### `Users/` — Citizen Registry
 
-Demographic and profile data for all registered citizens.
+### `Users/` — Citizen Registry
 
 > Contains personally identifiable attributes used for feature enrichment and population segmentation.
 
 ---
 
 > ⚠️ **None of the above data files are committed to this repository.** They are provided exclusively through the official Reply Sandbox 2026 challenge platform and must be placed manually inside `data/raw/` before running the pipeline.
- 
 
 ---
 
@@ -150,27 +142,27 @@ The output file is saved to `output/submission.txt`.
 
 ## 🤖 Solution Approach — Multi-Agent AI System
 
-**The Eye** implements a **cooperative multi-agent AI architecture** where each agent is responsible for a distinct stage of the classification pipeline. Agents communicate through shared state and operate in a coordinated, sequential fashion.
+**The Eye** implements a **cooperative multi-agent AI architecture** where each agent is responsible for a distinct stage of the classification pipeline.
 
 ```
 Raw Data
-   │
-   ▼
+    │
+    ▼
 ┌─────────────────────┐
-│   Feature Agent     │  ← Ingests raw streams, engineers temporal &
-│                     │    spatial features, handles missing values
+│    Feature Agent    │ ← Ingests raw streams, engineers temporal &
+│                     │   spatial features, handles missing values
 └────────┬────────────┘
          │
          ▼
 ┌─────────────────────┐
-│  Prediction Agent   │  ← Runs trained ML classifiers, generates
-│                     │    probability scores per citizen
+│  Prediction Agent   │ ← Runs trained ML classifiers, generates
+│                     │   probability scores per citizen
 └────────┬────────────┘
          │
          ▼
 ┌─────────────────────┐
-│  Decision Agent     │  ← Applies threshold logic, resolves conflicts,
-│                     │    produces final binary classification (0 / 1)
+│   Decision Agent    │ ← Applies threshold logic, resolves conflicts,
+│                     │   produces final binary classification (0 / 1)
 └────────┬────────────┘
          │
          ▼
@@ -198,15 +190,15 @@ Raw Data
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/<your-username>/reply-sandbox-2026-the-eye.git
-cd reply-sandbox-2026-the-eye
+git clone https://github.com/<your-username>/CareAlert-the-eye.git
+cd CareAlert-the-eye
 ```
 
 ### 2. Create a Virtual Environment
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate        # On Windows: .venv\Scripts\activate
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 ```
 
 ### 3. Install Dependencies
@@ -214,9 +206,10 @@ source .venv/bin/activate        # On Windows: .venv\Scripts\activate
 ```bash
 pip install -r requirements.txt
 ```
+
 ### 4. Add the Data
 
-Download the challenge datasets from the official **Reply Sandbox 2026** platform and place them inside the `data/raw/` directory, preserving the following structure:
+Download the challenge datasets from the official **Reply Sandbox 2026** platform and place them inside the `data/raw/` directory:
 
 ```
 data/
@@ -226,9 +219,8 @@ data/
     └── Users/
 ```
 
-> ⚠️ The `data/` directory is listed in `.gitignore` and is **never tracked by Git**.  
+> ⚠️ The `data/` directory is listed in `.gitignore` and is **never tracked by Git**.
 > Challenge data is proprietary to Reply S.p.A. — do not commit it to any public or private repository.
- 
 
 ---
 
@@ -239,8 +231,6 @@ data/
 ```bash
 python src/main.py
 ```
-
-This will sequentially invoke all three agents and produce the final submission file at `output/submission.txt`.
 
 ### Run Individual Agents
 
@@ -275,13 +265,9 @@ $$F1 = 2 \cdot \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \
 | **Recall** | TP / (TP + FN) | Avoid missing at-risk citizens |
 | **F1 Score** | Harmonic mean of P & R | Balance between both |
 
-> A high F1 Score ensures MirrorLife correctly identifies citizens who genuinely need preventive intervention, while minimizing unnecessary pathway activations.
-
 ---
 
 ## 🔧 Requirements
-
-Key dependencies (see `requirements.txt` for full list):
 
 ```
 pandas>=2.0
@@ -296,12 +282,12 @@ seaborn>=0.13
 ```
 
 ---
+
 ## 🤝 Contributing
 
-This is a competitive challenge repository.  
-- **During the active competition phase:** the repository is closed to external contributions.  
+This is a competitive challenge repository.
+- **During the active competition phase:** the repository is closed to external contributions.
 - **Post-competition:** pull requests for improvements, refactoring, alternative approaches, and documentation enhancements are warmly welcome. Please open an issue first to discuss your proposed change.
- 
 
 ---
 
